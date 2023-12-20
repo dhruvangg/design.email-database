@@ -2,6 +2,19 @@
 
 Following methods can be used: 
 
-- getTemplate
-- getTemplates
-- createTemplate
+- Templates
+```bash
+getTemplate
+getTemplates
+createTemplate
+```
+
+- Brands
+```bash
+createBrand
+```
+
+- Categories
+```bash
+createCategory
+```

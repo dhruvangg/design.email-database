@@ -7,6 +7,8 @@ const templateSchema = new mongoose.Schema({
     html: { type: String, required: true },
     image: { type: String, required: true },
     messageId: { type: String, required: true, unique: true },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+    brand: { type: mongoose.Schema.Types.ObjectId, ref: 'Brand' },
 }, { timestamps: true });
 
 const Template = mongoose.model('Template', templateSchema);
