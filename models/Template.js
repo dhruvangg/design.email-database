@@ -11,6 +11,7 @@ const templateSchema = new mongoose.Schema({
     brand: { type: mongoose.Schema.Types.ObjectId, ref: 'Brand' },
 }, { timestamps: true });
 
-const Template = mongoose.model('Template', templateSchema);
+templateSchema.index({ subject: 'text', html: 'text' });
+const Template = mongoose.models.Template || mongoose.model('Template', templateSchema);
 
 export default Template;

@@ -12,9 +12,9 @@ const createTemplate = async ({ subject, sender, body, html, image, messageId })
             image,
             messageId
         });
-        console.log('New Task Created:', newTemplate.subject);
+        return newTemplate;
     } catch (error) {
-        console.error('Error creating task:', error.message);
+        throw error
     }
 };
 
@@ -22,14 +22,24 @@ const getTemplates = async (page = 1, limit = 4) => {
     try {
         await connectDB();
         const skip = (page - 1) * limit;
-        const templates = await Template.find().skip(skip).limit(limit).exec()
+        const templates = await Template.find().select({ "html": 0}).skip(skip).limit(limit).sort({createdAt: -1}).exec()
         const count = await Template.countDocuments();
-        return { success: true, page, limit, count, templates };
+        return { page, limit, count, templates };
     } catch (error) {
-        return { success: false, error: error.message };
-    }
+        return { error: error.message };
+    } 
 }
 
+const getTemplatesByQuery = async (query) => {
+    try {
+        await connectDB();
+        const templates = await Template.find({ $text: { $search: query } }).select({ "html": 0}).sort({createdAt: -1}).exec()
+        return { query, templates };
+    } catch (error) {
+        return { error: error.message };
+    } 
+}
+  
 const getTemplate = async (id) => {
     try {
         await connectDB();
@@ -39,8 +49,7 @@ const getTemplate = async (id) => {
         return { success: false, error: error.message }
     }
 }
-
-export { createTemplate, getTemplates, getTemplate }
+export { createTemplate, getTemplates, getTemplate, getTemplatesByQuery }
 
 
 

@@ -6,6 +6,6 @@ const categorySchema = new mongoose.Schema({
     templates: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Template' }],
 }, { timestamps: true });
 
-const Category = mongoose.model('Category', categorySchema);
+const Category = mongoose.models.Category || mongoose.model('Category', categorySchema);
 
 export default Category;
