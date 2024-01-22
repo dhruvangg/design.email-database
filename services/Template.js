@@ -22,11 +22,6 @@ const createTemplate = async ({ subject, sender, body, html, image, messageId })
 /**
  * Retrieves a paginated list of templates from the database.
  *
- * This function connects to the database and fetches a specific page of templates, 
- * excluding their HTML content. It also returns the total count of templates 
- * available for pagination purposes. If there's an error during the database
- * operation, the function throws an error with the relevant message.
- *
  * @param {number} [page=1] - The page number of the templates to retrieve.
  * @param {number} [limit=10] - The maximum number of templates to retrieve per page.
  * @returns {Promise<Object>} A promise that resolves to an object containing the pagination data and a list of templates.
@@ -88,7 +83,7 @@ const getTemplate = async (id) => {
         const data = await Template.findById(id).exec();
         return { success: true, data }
     } catch (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message);
     }
 }
 
@@ -106,7 +101,7 @@ const deleteTemplate = async (id) => {
         const data = await Template.findByIdAndDelete(id)
         return { data }
     } catch (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message);
     }
 }
 
@@ -124,7 +119,7 @@ const deleteTemplates = async (ids) => {
         const data = await Template.deleteMany({ _id: { $in: ids } });
         return { success: true, data }
     } catch (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message);
     }
 }
 
@@ -147,29 +142,29 @@ const updateTemplate = async (condition, data) => {
         });
         return result
     } catch (error) {
-        return { error: error.message }
+        throw new Error(error.message);
     }
 }
 
 /**
  * Updates a specific template by its ID.
  *
- * @param {Object} condition - The condition to find the template (usually the ID).
+ * @param {string} id - The condition to find the template (usually the ID).
  * @param {Object} data - The data to update in the template.
  * @returns {Promise<Object>} A promise that resolves to the updated template document.
  * @throws {Error} If there is an error during the update operation.
  */
 
-const updateTemplateById = async (condition, data) => {
+const updateTemplateById = async (id, data) => {
     try {
         await connectDB();
-        const result = await Template.findOneAndUpdate(condition, data, {
+        const result = await Template.findByIdAndUpdate(id, data, {
             new: true,
             runValidators: true
         });
         return result
     } catch (error) {
-        return { error: error.message }
+        throw new Error(error.message);
     }
 }
 
@@ -188,10 +183,9 @@ const updateManyTemplates = async (condition, updateData) => {
         const result = await Template.updateMany(condition, updateData)
         return result
     } catch (error) {
-        return { error: error.message }
+        throw new Error(error.message);
     }
 }
-
 
 export {
     createTemplate,
@@ -199,6 +193,3 @@ export {
     getTemplates, getTemplate, getTemplatesByQuery,
     deleteTemplate, deleteTemplates
 }
-
-
-

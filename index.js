@@ -1,15 +1,13 @@
 import {
+    createTemplate, 
     getTemplate, getTemplates, getTemplatesByQuery,
-    createTemplate, updateTemplates,
+    updateTemplate, updateTemplateById, updateManyTemplates, 
     deleteTemplate, deleteTemplates
 } from './services/Template.js'
-import { createBrand } from './services/Brand.js'
-import { createCategory } from './services/Category.js'
-import Template from './models/Template.js'
 
 export {
-    Template, updateTemplates,
-    getTemplate, getTemplates, getTemplatesByQuery,
-    createTemplate, createBrand, createCategory,
+    createTemplate,
+    updateTemplate, updateTemplateById, updateManyTemplates,
+    getTemplates, getTemplate, getTemplatesByQuery,
     deleteTemplate, deleteTemplates
 };
