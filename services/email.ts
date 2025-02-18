@@ -1,4 +1,4 @@
-import { db } from "../lib/prisma";
+import { db } from "../lib/prisma.js";
 
 async function getEmails(offset = 0, limit = 10) {
     const templates = await db.emails.findMany({

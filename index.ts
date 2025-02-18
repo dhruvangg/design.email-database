@@ -1,3 +1,1 @@
-import { getEmail } from "./services/email";
-
-export { getEmail }
+export * from './services/email.js'

@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon sample.ts",
     "test": "jest",
-    "build": "tsc",
+    "build": "rm -rf dist && tsc && cp -r prisma dist/",
     "prepublishOnly": "npm run build"
   },
   "files": [
