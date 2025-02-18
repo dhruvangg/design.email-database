@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite" // "postgresql" | "mysql" | "sqlserver" | "sqlite" | "mongodb"
+  url      = env("DATABASE_URL") // DATABASE URL from env
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}
+
+model Emails {
+  id        String     @id @map("_id") @default(cuid())
+  subject   String
+  sender    String?
+  body      String
+  html      String
+  image     String
+  messageId String
+  tags      String?   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// model Tag {
+//   id    Int     @id @default(autoincrement())
+//   name  String  @unique
+// }

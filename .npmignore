@@ -1,0 +1,11 @@
+src
+node_modules
+dist/*.map
+dist/__test__
+test
+*.spec.js
+*.spec.ts
+*.test.js
+*.test.ts
+jest.config.js
+coverage
