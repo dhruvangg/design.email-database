@@ -8,7 +8,8 @@
     "dev": "nodemon sample.ts",
     "test": "jest",
     "build": "rm -rf dist && tsc && cp -r prisma dist/",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "postinstall": "prisma generate"
   },
   "files": [
     "dist",

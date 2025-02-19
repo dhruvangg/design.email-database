@@ -43,4 +43,11 @@ async function createEmail(data: any) {
     return template;
 }
 
-export { getEmails, getEmail, deleteEmail, updateEmail, createEmail };
+async function createBatchEmails(data: any) {
+    const template = await db.emails.createMany({
+        data,
+    });
+    return template;
+}
+
+export { getEmails, getEmail, deleteEmail, updateEmail, createEmail, createBatchEmails };
