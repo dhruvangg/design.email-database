@@ -17,6 +17,15 @@ async function getEmail(id: string) {
     return template;
 }
 
+async function getEmailByQuery(query: any) {
+    const template = await db.emails.findMany({
+        where: {
+            ...query,
+        },
+    });
+    return template;
+}
+
 async function deleteEmail(id: string) {
     const template = await db.emails.delete({
         where: {
@@ -50,4 +59,4 @@ async function createBatchEmails(data: any) {
     return template;
 }
 
-export { getEmails, getEmail, deleteEmail, updateEmail, createEmail, createBatchEmails };
+export { getEmails, getEmail, deleteEmail, updateEmail, createEmail, createBatchEmails, getEmailByQuery };
