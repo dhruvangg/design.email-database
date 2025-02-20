@@ -1,7 +1,10 @@
 import { db } from "../lib/prisma.js";
 
-export async function getBrands() {
-    const brands = await db.domains.findMany();
+export async function getBrands(offset = 0, limit = 10) {
+    const brands = await db.domains.findMany({
+        skip: offset,
+        take: limit,
+    })
     return brands;
 }
 
