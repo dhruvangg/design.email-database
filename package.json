@@ -1,6 +1,6 @@
 {
   "name": "design.email-database",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A package to access EmailStencil database",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
