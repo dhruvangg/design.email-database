@@ -1,27 +1,29 @@
-import { db } from './lib/prisma.js';
-import { createBrand } from './services/brand.js';
-import { getEmailByQuery } from './services/email.js'
+import { db } from "./lib/prisma.js";
+import { createBrand } from "./services/brand.js";
+import { getEmailByQuery } from "./services/email.js";
+import { getBrands } from "./services/brand.js";
 
-export * from './services/email.js'
-export * from './services/brand.js'
+export * from "./services/email.js";
+export * from "./services/brand.js";
 
 async function main() {
-    const email = await createBrand({
-        name: 'test'
-    })
-    console.log(email);
+  //   const email = await createBrand({
+  //     name: "test",
+  //   });
+
+  const brands = await getBrands();
+  console.log({ brands });
 }
 
 main()
-    .then(async () => {
-        await db.$disconnect()
-    })
-    .catch(async (e) => {
-        console.error(e)
-        await db.$disconnect()
-        process.exit(1)
-    })
-
+  .then(async () => {
+    await db.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await db.$disconnect();
+    process.exit(1);
+  });
 
 /*
 
