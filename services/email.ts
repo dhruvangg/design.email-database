@@ -17,7 +17,7 @@ async function getEmail(id: string) {
     return template;
 }
 
-async function getEmailByQuery(query: any) {
+async function getEmailsByQuery(query: any) {
     const template = await db.emails.findMany({
         where: {
             ...query,
@@ -59,4 +59,4 @@ async function createBatchEmails(data: any) {
     return template;
 }
 
-export { getEmails, getEmail, deleteEmail, updateEmail, createEmail, createBatchEmails, getEmailByQuery };
+export { getEmails, getEmail, deleteEmail, updateEmail, createEmail, createBatchEmails, getEmailsByQuery };

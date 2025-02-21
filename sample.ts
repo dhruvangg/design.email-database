@@ -1,6 +1,6 @@
 import { db } from "./lib/prisma.js";
 import { createBrand } from "./services/brand.js";
-import { getEmailByQuery } from "./services/email.js";
+import { getEmailsByQuery } from "./services/email.js";
 import { getBrands } from "./services/brand.js";
 
 export * from "./services/email.js";
@@ -11,8 +11,15 @@ async function main() {
   //     name: "test",
   //   });
 
-  const brands = await getBrands();
-  console.log({ brands });
+//   const brands = await getBrands();
+//   console.log({ brands });
+const emails = await getEmailsByQuery({
+    domain_id: 1
+})
+
+console.log(emails.length);
+
+
 }
 
 main()
